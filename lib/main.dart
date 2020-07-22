@@ -28,6 +28,7 @@ class MyHomePage extends StatelessWidget {
       date: DateTime.now(),
     ),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,9 +46,28 @@ class MyHomePage extends StatelessWidget {
               child: Container(width: 100, child: Text('CHART!')),
             ),
           ),
-          Card(
-            color: Colors.red,
-            child: Text('LIST OF TX'),
+          Column(
+            children: transactions.map(
+              (trans) {
+                return Card(
+                  child: Row(
+                    children: [
+                      Container(
+                        child: Text(
+                          trans.amount.toString(),
+                        ),
+                      ),
+                      Column(
+                        children: [
+                          Text(trans.title),
+                          Text(trans.date.toString())
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ).toList(),
           ),
         ],
       ),
