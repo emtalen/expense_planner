@@ -15,7 +15,7 @@ class Chart extends StatelessWidget {
         final weekDay = DateTime.now().subtract(
           Duration(days: index),
         );
-        double totalSum = 0.0;
+        var totalSum = 0.0;
 
         for (var i = 0; i < recentTransactions.length; i++) {
           if (recentTransactions[i].date.day == weekDay.day &&
@@ -26,7 +26,7 @@ class Chart extends StatelessWidget {
         }
         return {
           'day': DateFormat.E().format(weekDay).substring(0, 1),
-          'amount': totalSum
+          'amount': totalSum,
         };
       },
     );
@@ -51,7 +51,7 @@ class Chart extends StatelessWidget {
           return ChartBar(
             data['day'],
             data['amount'],
-            (data['amount'] as double) / totalSpending,
+            totalSpending == 0.0 ? 0.0 : (data['amount'] as double) / totalSpending,
           );
         }).toList(),
       ),
